@@ -9,11 +9,49 @@
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 <div class="row">
     <div class="col-md-6">
-        <form id="profile-form" method="post">
+        <form id="profile-form" method="post" enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Username"></label>
                 <input asp-for="Username" class="form-control" disabled />
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.FirstName"></label>
+                <input asp-for="Input.FirstName" class="form-control" />
+                <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.LastName"></label>
+                <input asp-for="Input.LastName" class="form-control" />
+                <span asp-validation-for="Input.LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.RegionId"></label>
+                <select asp-for="Input.RegionId" class="form-control"
+                        asp-items="@(new SelectList(Model.Regions,"Id","Title"))" disabled>
+                    @*<option>Выберите из списка</option>*@
+                </select>
+                <span asp-validation-for="Input.RegionId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.CityId"></label>
+                <select asp-for="Input.CityId" class="form-control"
+                        asp-items="@(new SelectList(Model.Cities,"Id","Title"))">
+                    @*<option>Выберите из списка</option>*@
+                </select>
+                <span asp-validation-for="Input.CityId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @if (Model.Photo != null)
+                {
+                    <div><img src="~/Photos/@(Model.UserId).jpg" width="200" height="200" /></div>
+                }
+                <div>
+                    <label asp-for="Input.PhotoImage"></label>
+                    <input asp-for="Input.PhotoImage" class="form-control" type="file" />
+                    <span asp-validation-for="Input.PhotoImage" class="text-danger"></span>
+                </div>
             </div>
             <div class="form-group">
                 <label asp-for="Input.PhoneNumber"></label>
