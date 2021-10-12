@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using WebApplication.Data;
 using WebApplication.Models;
 
 namespace WebApplication.Areas.Identity.Pages.Account.Manage
@@ -14,13 +15,16 @@ namespace WebApplication.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly ApplicationDbContext _context;
 
         public IndexModel(
             UserManager<User> userManager,
-            SignInManager<User> signInManager)
+            SignInManager<User> signInManager,
+            ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _context = context;
         }
 
         public string Username { get; set; }
@@ -28,11 +32,22 @@ namespace WebApplication.Areas.Identity.Pages.Account.Manage
         [TempData]
         public string StatusMessage { get; set; }
 
+        public List<Region> Regions { get; set; }
+        public List<City> Cities { get; set; }
+
         [BindProperty]
         public InputModel Input { get; set; }
 
         public class InputModel
         {
+            [Display(Name = "Имя")]
+            public string FirstName { get; set; }
+            [Display(Name = "Фамилия")]
+            public string LastName { get; set; }
+            [Display(Name = "Регион")]
+            public int RegionId { get; set; }
+            [Display(Name = "Город")]
+            public int CityId { get; set; }
             [Phone]
             [Display(Name = "Телефон")]
             public string PhoneNumber { get; set; }
@@ -43,11 +58,18 @@ namespace WebApplication.Areas.Identity.Pages.Account.Manage
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
 
+            Regions = _context.Regions.ToList();
+            Cities = _context.Cities.ToList();
+
             Username = userName;
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                PhoneNumber = phoneNumber,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                RegionId = user.RegionId,
+                CityId = user.CityId
             };
         }
 
@@ -88,8 +110,32 @@ namespace WebApplication.Areas.Identity.Pages.Account.Manage
                 }
             }
 
+            if (Input.FirstName != user.FirstName)
+            {
+                user.FirstName = Input.FirstName;
+                await _userManager.UpdateAsync(user);
+            }
+
+            if (Input.LastName != user.LastName)
+            {
+                user.LastName = Input.LastName;
+                await _userManager.UpdateAsync(user);
+            }
+
+            if (Input.RegionId != user.RegionId)
+            {
+                user.RegionId = Input.RegionId;
+                await _userManager.UpdateAsync(user);
+            }
+
+            if (Input.CityId != user.CityId)
+            {
+                user.CityId = Input.CityId;
+                await _userManager.UpdateAsync(user);
+            }
+
             await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Аккаунт обновлён!";
+            StatusMessage = "Ваш аккаунт обновлён!";
             return RedirectToPage();
         }
     }

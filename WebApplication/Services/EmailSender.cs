@@ -12,7 +12,7 @@ namespace WebApplication.Services
         {
             var message = new MimeMessage();
 
-            message.From.Add(new MailboxAddress("НаМаникюр.рф", "login"));
+            message.From.Add(new MailboxAddress("НаМаникюр.рф", "mail@xn--80aayihed0a9j.xn--p1ai"));
             message.To.Add(new MailboxAddress("Пользователь", email));
             message.Subject = subject;
             message.Body = new TextPart(MimeKit.Text.TextFormat.Html)
@@ -24,7 +24,7 @@ namespace WebApplication.Services
             {
                 await client.ConnectAsync("mail.hosting.reg.ru", 465, true);
                 // https://www.reg.ru/web-tools/punycode
-                await client.AuthenticateAsync("login", "password");
+                await client.AuthenticateAsync("mail@xn--80aayihed0a9j.xn--p1ai", "c29mh3F_");
                 await client.SendAsync(message);
 
                 await client.DisconnectAsync(true);
