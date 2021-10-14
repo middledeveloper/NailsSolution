@@ -12,7 +12,7 @@ namespace WebApplication.Models
         [DisplayName("Наименование")]
         public string Title { get; set; }
         [DisplayName("Категория")]
-        public string Category { get; set; }
+        public int CategoryId { get; set; }
         [DisplayName("Стоимость")]
         [DisplayFormat(DataFormatString = "{0:c0}")]
         [Column(TypeName = "decimal(18,4)")]

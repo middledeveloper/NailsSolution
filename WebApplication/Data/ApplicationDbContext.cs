@@ -28,6 +28,7 @@ namespace WebApplication.Data
         public DbSet<Photo> Photos { get; set; }
         public DbSet<SocialType> SocialTypes { get; set; }
         public DbSet<Social> Socials { get; set; }
+        public DbSet<ServiceCategory> ServiceCategories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

@@ -277,9 +277,9 @@ namespace WebApplication.Migrations
                         new
                         {
                             Id = 1,
-                            Created = new DateTime(2021, 10, 11, 13, 49, 58, 846, DateTimeKind.Local).AddTicks(3858),
+                            Created = new DateTime(2021, 10, 14, 8, 39, 39, 205, DateTimeKind.Local).AddTicks(9562),
                             Title = "Paris Nail",
-                            Updated = new DateTime(2021, 10, 11, 13, 49, 58, 846, DateTimeKind.Local).AddTicks(3858),
+                            Updated = new DateTime(2021, 10, 14, 8, 39, 39, 205, DateTimeKind.Local).AddTicks(9562),
                             Url = "https://parisnail.ru/"
                         });
                 });
@@ -313,26 +313,26 @@ namespace WebApplication.Migrations
                         new
                         {
                             Id = 1,
-                            Created = new DateTime(2021, 10, 11, 13, 49, 58, 846, DateTimeKind.Local).AddTicks(3858),
+                            Created = new DateTime(2021, 10, 14, 8, 39, 39, 205, DateTimeKind.Local).AddTicks(9562),
                             RegionId = 1,
                             Title = "Тихвин",
-                            Updated = new DateTime(2021, 10, 11, 13, 49, 58, 846, DateTimeKind.Local).AddTicks(3858)
+                            Updated = new DateTime(2021, 10, 14, 8, 39, 39, 205, DateTimeKind.Local).AddTicks(9562)
                         },
                         new
                         {
                             Id = 2,
-                            Created = new DateTime(2021, 10, 11, 13, 49, 58, 846, DateTimeKind.Local).AddTicks(3858),
+                            Created = new DateTime(2021, 10, 14, 8, 39, 39, 205, DateTimeKind.Local).AddTicks(9562),
                             RegionId = 1,
                             Title = "Пикалёво",
-                            Updated = new DateTime(2021, 10, 11, 13, 49, 58, 846, DateTimeKind.Local).AddTicks(3858)
+                            Updated = new DateTime(2021, 10, 14, 8, 39, 39, 205, DateTimeKind.Local).AddTicks(9562)
                         },
                         new
                         {
                             Id = 3,
-                            Created = new DateTime(2021, 10, 11, 13, 49, 58, 846, DateTimeKind.Local).AddTicks(3858),
+                            Created = new DateTime(2021, 10, 14, 8, 39, 39, 205, DateTimeKind.Local).AddTicks(9562),
                             RegionId = 1,
                             Title = "Бокситогорск",
-                            Updated = new DateTime(2021, 10, 11, 13, 49, 58, 846, DateTimeKind.Local).AddTicks(3858)
+                            Updated = new DateTime(2021, 10, 14, 8, 39, 39, 205, DateTimeKind.Local).AddTicks(9562)
                         });
                 });
 
@@ -435,9 +435,9 @@ namespace WebApplication.Migrations
                         new
                         {
                             Id = 1,
-                            Created = new DateTime(2021, 10, 11, 13, 49, 58, 846, DateTimeKind.Local).AddTicks(3858),
+                            Created = new DateTime(2021, 10, 14, 8, 39, 39, 205, DateTimeKind.Local).AddTicks(9562),
                             Title = "Ленинградская область",
-                            Updated = new DateTime(2021, 10, 11, 13, 49, 58, 846, DateTimeKind.Local).AddTicks(3858)
+                            Updated = new DateTime(2021, 10, 14, 8, 39, 39, 205, DateTimeKind.Local).AddTicks(9562)
                         });
                 });
 
@@ -465,30 +465,30 @@ namespace WebApplication.Migrations
                         new
                         {
                             Id = 1,
-                            Created = new DateTime(2021, 10, 11, 13, 49, 58, 846, DateTimeKind.Local).AddTicks(3858),
+                            Created = new DateTime(2021, 10, 14, 8, 39, 39, 205, DateTimeKind.Local).AddTicks(9562),
                             Title = "Болезнь мастера",
-                            Updated = new DateTime(2021, 10, 11, 13, 49, 58, 846, DateTimeKind.Local).AddTicks(3858)
+                            Updated = new DateTime(2021, 10, 14, 8, 39, 39, 205, DateTimeKind.Local).AddTicks(9562)
                         },
                         new
                         {
                             Id = 2,
-                            Created = new DateTime(2021, 10, 11, 13, 49, 58, 846, DateTimeKind.Local).AddTicks(3858),
+                            Created = new DateTime(2021, 10, 14, 8, 39, 39, 205, DateTimeKind.Local).AddTicks(9562),
                             Title = "Болезнь клиента",
-                            Updated = new DateTime(2021, 10, 11, 13, 49, 58, 846, DateTimeKind.Local).AddTicks(3858)
+                            Updated = new DateTime(2021, 10, 14, 8, 39, 39, 205, DateTimeKind.Local).AddTicks(9562)
                         },
                         new
                         {
                             Id = 3,
-                            Created = new DateTime(2021, 10, 11, 13, 49, 58, 846, DateTimeKind.Local).AddTicks(3858),
+                            Created = new DateTime(2021, 10, 14, 8, 39, 39, 205, DateTimeKind.Local).AddTicks(9562),
                             Title = "Технические проблемы",
-                            Updated = new DateTime(2021, 10, 11, 13, 49, 58, 846, DateTimeKind.Local).AddTicks(3858)
+                            Updated = new DateTime(2021, 10, 14, 8, 39, 39, 205, DateTimeKind.Local).AddTicks(9562)
                         },
                         new
                         {
                             Id = 4,
-                            Created = new DateTime(2021, 10, 11, 13, 49, 58, 846, DateTimeKind.Local).AddTicks(3858),
+                            Created = new DateTime(2021, 10, 14, 8, 39, 39, 205, DateTimeKind.Local).AddTicks(9562),
                             Title = "Клиент не явился",
-                            Updated = new DateTime(2021, 10, 11, 13, 49, 58, 846, DateTimeKind.Local).AddTicks(3858)
+                            Updated = new DateTime(2021, 10, 14, 8, 39, 39, 205, DateTimeKind.Local).AddTicks(9562)
                         });
                 });
 
@@ -543,8 +543,8 @@ namespace WebApplication.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Category")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
@@ -571,6 +571,21 @@ namespace WebApplication.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Services");
+                });
+
+            modelBuilder.Entity("WebApplication.Models.ServiceCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ServiceCategories");
                 });
 
             modelBuilder.Entity("WebApplication.Models.Social", b =>
@@ -629,34 +644,34 @@ namespace WebApplication.Migrations
                         new
                         {
                             Id = 1,
-                            Created = new DateTime(2021, 10, 11, 13, 49, 58, 846, DateTimeKind.Local).AddTicks(3858),
+                            Created = new DateTime(2021, 10, 14, 8, 39, 39, 205, DateTimeKind.Local).AddTicks(9562),
                             Logo = "/Logos/Email.png",
                             Title = "Email",
-                            Updated = new DateTime(2021, 10, 11, 13, 49, 58, 846, DateTimeKind.Local).AddTicks(3858)
+                            Updated = new DateTime(2021, 10, 14, 8, 39, 39, 205, DateTimeKind.Local).AddTicks(9562)
                         },
                         new
                         {
                             Id = 2,
-                            Created = new DateTime(2021, 10, 11, 13, 49, 58, 846, DateTimeKind.Local).AddTicks(3858),
+                            Created = new DateTime(2021, 10, 14, 8, 39, 39, 205, DateTimeKind.Local).AddTicks(9562),
                             Logo = "/Logos/Instagram.png",
                             Title = "Instagram",
-                            Updated = new DateTime(2021, 10, 11, 13, 49, 58, 846, DateTimeKind.Local).AddTicks(3858)
+                            Updated = new DateTime(2021, 10, 14, 8, 39, 39, 205, DateTimeKind.Local).AddTicks(9562)
                         },
                         new
                         {
                             Id = 3,
-                            Created = new DateTime(2021, 10, 11, 13, 49, 58, 846, DateTimeKind.Local).AddTicks(3858),
+                            Created = new DateTime(2021, 10, 14, 8, 39, 39, 205, DateTimeKind.Local).AddTicks(9562),
                             Logo = "/Logos/Whatsapp.png",
                             Title = "Whatsapp",
-                            Updated = new DateTime(2021, 10, 11, 13, 49, 58, 846, DateTimeKind.Local).AddTicks(3858)
+                            Updated = new DateTime(2021, 10, 14, 8, 39, 39, 205, DateTimeKind.Local).AddTicks(9562)
                         },
                         new
                         {
                             Id = 4,
-                            Created = new DateTime(2021, 10, 11, 13, 49, 58, 846, DateTimeKind.Local).AddTicks(3858),
+                            Created = new DateTime(2021, 10, 14, 8, 39, 39, 205, DateTimeKind.Local).AddTicks(9562),
                             Logo = "/Logos/VK.png",
                             Title = "VK",
-                            Updated = new DateTime(2021, 10, 11, 13, 49, 58, 846, DateTimeKind.Local).AddTicks(3858)
+                            Updated = new DateTime(2021, 10, 14, 8, 39, 39, 205, DateTimeKind.Local).AddTicks(9562)
                         });
                 });
 
