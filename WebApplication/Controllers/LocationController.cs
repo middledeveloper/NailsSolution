@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using WebApplication.Data;
 using WebApplication.Models;
+using WebApplication.Models.ViewModels;
 
 namespace WebApplication.Controllers
 {
@@ -17,7 +18,13 @@ namespace WebApplication.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            LocationViewModel model = new()
+            {
+                Regions = context.Regions.ToList(),
+                Cities = context.Cities.ToList()
+            };
+
+            return View(model);
         }
 
         [HttpPost]
@@ -25,18 +32,21 @@ namespace WebApplication.Controllers
         {
             if (!string.IsNullOrEmpty(regionName))
             {
-                var region = new Region()
+                if (context.Regions.FirstOrDefault(x => x.Title == regionName) == null)
                 {
-                    Created = DateTime.Now,
-                    Updated = DateTime.Now,
-                    Title = regionName
-                };
+                    var region = new Region()
+                    {
+                        Created = DateTime.Now,
+                        Updated = DateTime.Now,
+                        Title = regionName
+                    };
 
-                context.Regions.Add(region);
-                context.SaveChanges();
+                    context.Regions.Add(region);
+                    context.SaveChanges();
+                }
             }
 
-            return View("Index");
+            return RedirectToAction("Index");
         }
 
         [HttpPost]

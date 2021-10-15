@@ -1,0 +1,37 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model WebApplication.Models.ViewModels.LocationViewModel
+
+@{
+    ViewData["Title"] = "Управление локациями";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<form asp-action="CreateRegion" method="post">
+    <div class="form-group">
+        Зарегистрированные регионы:
+        <ul>
+            @foreach(var region in Model.Regions)
+            {
+                <li>@region.Title</li>
+            }
+        </ul>
+        <label for="RegionName">Новый регион</label>
+        <input name="RegionName" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Добавить</button>
+</form>
+
+<form asp-action="CreateCity" method="post">
+    <div class="form-group">
+        <label for="RegionId">Регион</label>
+        <select asp-for="RegionId" class="form-control"
+                asp-items="@(new SelectList(Model.Regions,"Id","Title"))" disabled>
+        </select>
+
+        <label for="CityName">Новый регион</label>
+        <input name="CityName" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Добавить</button>
+</form>
