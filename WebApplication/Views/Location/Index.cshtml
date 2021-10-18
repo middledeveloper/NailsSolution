@@ -6,32 +6,74 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<h1 class="text-center mb-5">Управление локациями</h1>
 <div asp-validation-summary="All" class="text-danger"></div>
 
-<form asp-action="CreateRegion" method="post">
-    <div class="form-group">
-        Зарегистрированные регионы:
-        <ul>
-            @foreach(var region in Model.Regions)
-            {
-                <li>@region.Title</li>
-            }
-        </ul>
-        <label for="RegionName">Новый регион</label>
-        <input name="RegionName" class="form-control" />
+<div class="container">
+    <div class="row">
+        <div class="col mb-2">
+            <h4>Создать регион</h4>
+            <form asp-action="CreateRegion" method="post">
+                <div class="form-group">
+                    Зарегистрированные регионы:
+                    <ul>
+                        @foreach (var region in Model.Regions)
+                        {
+                            <li>@region.Title</li>
+                        }
+                    </ul>
+                    <label for="RegionName">Новый регион</label>
+                    <input name="RegionName" class="form-control" />
+                </div>
+                <button type="submit" class="btn btn-primary">Добавить</button>
+            </form>
+        </div>
+        <div class="col mb-2">
+            <h4>Обновить регион</h4>
+            <form asp-action="UpdateRegion" method="post">
+                <div class="form-group">
+                    Обновить регион:
+                    <select asp-for="RegionId" class="form-control"
+                            asp-items="@(new SelectList(Model.Regions,"Id","Title"))">
+                    </select>
+                    <label for="RegionName">Новое наименование</label>
+                    <input name="RegionName" class="form-control" />
+                </div>
+                <button type="submit" class="btn btn-primary">Обновить</button>
+            </form>
+        </div>
     </div>
-    <button type="submit" class="btn btn-primary">Добавить</button>
-</form>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col mb-2">
+            <h4>Создать населённый пункт</h4>
+            <form asp-action="CreateCity" method="post">
+                <div class="form-group">
+                    <label for="RegionId">Регион</label>
+                    <select asp-for="RegionId" class="form-control"
+                            asp-items="@(new SelectList(Model.Regions,"Id","Title"))">
+                    </select>
 
-<form asp-action="CreateCity" method="post">
-    <div class="form-group">
-        <label for="RegionId">Регион</label>
-        <select asp-for="RegionId" class="form-control"
-                asp-items="@(new SelectList(Model.Regions,"Id","Title"))" disabled>
-        </select>
-
-        <label for="CityName">Новый регион</label>
-        <input name="CityName" class="form-control" />
+                    <label for="CityName">Новый населённый пункт</label>
+                    <input name="CityName" class="form-control" />
+                </div>
+                <button type="submit" class="btn btn-primary">Добавить</button>
+            </form>
+        </div>
+        <div class="col mb-2">
+            <h4>Обновить населённый пункт</h4>
+            <form asp-action="UpdateCity" method="post">
+                <div class="form-group">
+                    Обновить населённый пункт:
+                    <select asp-for="CityId" class="form-control"
+                            asp-items="@(new SelectList(Model.Cities,"Id","Title"))">
+                    </select>
+                    <label for="CityName">Новое наименование</label>
+                    <input name="CityName" class="form-control" />
+                </div>
+                <button type="submit" class="btn btn-primary">Обновить</button>
+            </form>
+        </div>
     </div>
-    <button type="submit" class="btn btn-primary">Добавить</button>
-</form>
+</div>

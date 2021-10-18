@@ -1,10 +1,11 @@
 ﻿@{
-    ViewData["Title"] = "Roles Index";
+    ViewData["Title"] = "Панель администратора";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Панель администратора</h2>
 <ul>
-    <li>@Html.ActionLink("Управление ролями", "Index", "Roles", new { @class = "elements" }, null)</li>
+    <li>@Html.ActionLink("Управление ролями", "Index", "Role")</li>
+    <li>@Html.ActionLink("Управление локациями", "Index", "Location")</li>
     <li>Что-то ещё..</li>
 </ul>

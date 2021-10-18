@@ -20,8 +20,8 @@ namespace WebApplication.Controllers
         {
             LocationViewModel model = new()
             {
-                Regions = context.Regions.ToList(),
-                Cities = context.Cities.ToList()
+                Regions = context.Regions.OrderBy(x => x.Title).ToList(),
+                Cities = context.Cities.OrderBy(x => x.Title).ToList()
             };
 
             return View(model);
@@ -50,6 +50,20 @@ namespace WebApplication.Controllers
         }
 
         [HttpPost]
+        public IActionResult UpdateRegion(int regionId, string regionName)
+        {
+            var region = context.Regions.FirstOrDefault(x => x.Id == regionId);
+            if (!string.IsNullOrEmpty(regionName) && region.Title != regionName)
+            {
+                region.Title = regionName;
+                region.Updated = DateTime.Now;
+                context.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
         public IActionResult CreateCity(int regionId, string cityName)
         {
             if (!string.IsNullOrEmpty(cityName))
@@ -66,32 +80,21 @@ namespace WebApplication.Controllers
                 context.SaveChanges();
             }
 
-            return View("Index");
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
-        public IActionResult UpdateRegion(int regionId)
-        {
-            var region = context.Regions.FirstOrDefault(x => x.Id == regionId);
-            if (region != null)
-            {
-                // Do something
-                context.SaveChanges();
-            }
-
-            return View("Index");
-        }
-
-        [HttpPost]
-        public IActionResult UpdateCity(int cityId)
+        public IActionResult UpdateCity(int cityId, string cityName)
         {
             var city = context.Cities.FirstOrDefault(x => x.Id == cityId);
-            if (city != null)
+            if (!string.IsNullOrEmpty(cityName) && city.Title != cityName)
             {
+                city.Title = cityName;
+                city.Updated = DateTime.Now;
                 context.SaveChanges();
             }
 
-            return View("Index");
+            return RedirectToAction("Index");
         }
     }
 }
