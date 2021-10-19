@@ -14,7 +14,7 @@ namespace WebApplication.Data
         }
 
         public DbSet<Certificate> Certificates { get; set; }
-        public DbSet<CertificationAhority> CertificationAhorities { get; set; }
+        public DbSet<CertificationAuthority> CertificationAuthorities { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<User> AppUsers { get; set; }
         public DbSet<ContentBlock> ContentBlocks { get; set; }
@@ -49,13 +49,13 @@ namespace WebApplication.Data
             var socialType4 = new SocialType() { Id = 4, Title = "VK", Logo = "/Logos/VK.png", Created = dt, Updated = dt };
             builder.Entity<SocialType>().HasData(socialType1, socialType2, socialType3, socialType4);
 
-            var authority = new CertificationAhority() { Id = 1, Title = "Paris Nail", Url = "https://parisnail.ru/", Created = dt, Updated = dt };
-            builder.Entity<CertificationAhority>().HasData(authority);
+            var authority = new CertificationAuthority() { Id = 1, Title = "Paris Nail", Url = "https://parisnail.ru/", Created = dt, Updated = dt };
+            builder.Entity<CertificationAuthority>().HasData(authority);
 
-            var reject1 = new RejectReason() { Id = 1, Title = "Болезнь мастера", Created = dt, Updated = dt };
-            var reject2 = new RejectReason() { Id = 2, Title = "Болезнь клиента", Created = dt, Updated = dt };
+            var reject1 = new RejectReason() { Id = 1, Title = "Состояние здоровья (мастер)", Created = dt, Updated = dt };
+            var reject2 = new RejectReason() { Id = 2, Title = "Состояние здоровья (клиент)", Created = dt, Updated = dt };
             var reject3 = new RejectReason() { Id = 3, Title = "Технические проблемы", Created = dt, Updated = dt };
-            var reject4 = new RejectReason() { Id = 4, Title = "Клиент не явился", Created = dt, Updated = dt };
+            var reject4 = new RejectReason() { Id = 4, Title = "Неявка (клиент)", Created = dt, Updated = dt };
             builder.Entity<RejectReason>().HasData(reject1, reject2, reject3, reject4);
         }
     }

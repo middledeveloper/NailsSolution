@@ -1,0 +1,50 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model WebApplication.Models.ViewModels.CertificateViewModel
+
+@{
+    ViewData["Title"] = "Управление сертификатами";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center mb-5">Управление сертификатами</h1>
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col mb-2">
+            <h4>Создать центр сертификации</h4>
+            <form asp-action="CreateAuthorityCenter" method="post">
+                <div class="form-group">
+                    Зарегистрированные центры:
+                    <ul>
+                        @foreach (var authority in Model.Authorities)
+                        {
+                            <li>@authority.Title (@authority.Url)</li>
+                        }
+                    </ul>
+                    <label for="AuthorityName">Наименование</label>
+                    <input name="AuthorityName" class="form-control" />
+                    <label for="AuthorityUrl">URL</label>
+                    <input name="AuthorityUrl" class="form-control" />
+                </div>
+                <button type="submit" class="btn btn-primary">Добавить</button>
+            </form>
+        </div>
+        <div class="col mb-2">
+            <h4>Обновить регион</h4>
+            <form asp-action="UpdateAuthorityCenter" method="post">
+                <div class="form-group">
+                    Обновить центр сертификации:
+                    <select asp-for="AuthorityId" class="form-control"
+                            asp-items="@(new SelectList(Model.Authorities,"Id","Title"))">
+                    </select>
+                    <label for="AuthorityName">Новое наименование</label>
+                    <input name="AuthorityName" class="form-control" />
+                    <label for="AuthorityUrl">Новый URL</label>
+                    <input name="AuthorityUrl" class="form-control" />
+                </div>
+                <button type="submit" class="btn btn-primary">Обновить</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -83,10 +83,12 @@ namespace WebApplication.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
+                    var webSiteNeedAdmin = false;
                     // Create application roles and add user to default role
                     if (!await _roleManager.RoleExistsAsync(AppRoles.AdminRole))
                     {
                         await _roleManager.CreateAsync(new IdentityRole(AppRoles.AdminRole));
+                        webSiteNeedAdmin = true;
                     }
 
                     if (!await _roleManager.RoleExistsAsync(AppRoles.MasterRole))
@@ -98,6 +100,9 @@ namespace WebApplication.Areas.Identity.Pages.Account
                     {
                         await _roleManager.CreateAsync(new IdentityRole(AppRoles.ClientRole));
                     }
+
+                    if (webSiteNeedAdmin)
+                        await _userManager.AddToRoleAsync(user, AppRoles.AdminRole);
 
                     await _userManager.AddToRoleAsync(user, AppRoles.ClientRole);
                     // Roles created and default role set

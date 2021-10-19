@@ -2,7 +2,7 @@
 
 namespace WebApplication.Models.ViewModels
 {
-    public class UserMainPageViewModel
+    public class MasterPageViewModel
     {
         public string Name { get; set; }
         public string Location { get; set; }
