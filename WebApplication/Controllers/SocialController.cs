@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.IO;
 using System.Linq;
+using System.Net.Mime;
 using WebApplication.Data;
 using WebApplication.Models;
 using WebApplication.Models.ViewModels;
@@ -47,11 +48,16 @@ namespace WebApplication.Controllers
 
                     if (logoFile != null)
                     {
-                        if (logoFile.FileName.EndsWith(".jpg") || logoFile.FileName.EndsWith(".jpeg"))
+                        if (logoFile.ContentType == "image/png")
                         {
-                            var filePath = Path.Combine(environment.WebRootPath, "Logos", $"{socialName}.jpg");
-                            logoFile.CopyTo(new FileStream(filePath, FileMode.Create));
-                            socialType.Logo = $"{socialName}.jpg";
+                            var filePath = Path.Combine(environment.WebRootPath, "Logos", $"{socialName}.png");
+
+                            using (var stream = new FileStream(filePath, FileMode.Create))
+                            {
+                                logoFile.CopyTo(stream);
+                            }
+
+                            socialType.Logo = $"/Logos/{socialName}.png";
                         }
                     }
 
@@ -67,24 +73,40 @@ namespace WebApplication.Controllers
         public IActionResult Update(int socialId, string socialName, IFormFile logoFile)
         {
             var socialType = context.SocialTypes.FirstOrDefault(x => x.Id == socialId);
+            var updated = false;
+
             if (!string.IsNullOrEmpty(socialName) && socialType.Title != socialName)
             {
                 socialType.Title = socialName;
-                socialType.Updated = DateTime.Now;
+                updated = true;
+            }
 
-                if (logoFile != null)
+            if (logoFile != null)
+            {
+                if (logoFile.ContentType == "image/png")
                 {
-                    if (logoFile.FileName.EndsWith(".jpg") || logoFile.FileName.EndsWith(".jpeg"))
+                    var oldFilePath = Path.Combine(environment.WebRootPath, "Logos", $"{socialType.Title}.png");
+                    var newFilePath = Path.Combine(environment.WebRootPath, "Logos", $"{socialName}.png");
+
+                    if (System.IO.File.Exists(oldFilePath))
+                        System.IO.File.Delete(oldFilePath);
+
+                    var resultPath = String.IsNullOrEmpty(socialName) ? oldFilePath : newFilePath;
+                    using (var stream = new FileStream(resultPath, FileMode.Create))
                     {
-                        var filePath = Path.Combine(environment.WebRootPath, "Logos", $"{socialName}.jpg");
-                        if (System.IO.File.Exists(filePath))
-                            System.IO.File.Delete(filePath);
-
-                        logoFile.CopyTo(new FileStream(filePath, FileMode.Create));
-                        socialType.Logo = $"{socialName}.jpg";
+                        logoFile.CopyTo(stream);
                     }
-                }
+                    socialType.Logo = String.IsNullOrEmpty(socialName) ?
+                        $"/Logos/{socialType.Title}.png" :
+                        $"/Logos/{socialName}.png";
 
+                    updated = true;
+                }
+            }
+
+            if (updated)
+            {
+                socialType.Updated = DateTime.Now;
                 context.SaveChanges();
             }
 

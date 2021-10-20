@@ -1,0 +1,59 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model WebApplication.Models.ViewModels.SocialViewModel
+
+@{
+    ViewData["Title"] = "Управление типами контактов";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center mb-5">Управление типами контактов</h1>
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col mb-2">
+            <h4>Создать тип контакта</h4>
+            <form asp-action="Create" method="post" enctype="multipart/form-data">
+                @Html.AntiForgeryToken()
+                <div class="form-group">
+                    <ul class="list-group">
+                        @foreach (var socialType in Model.SocialTypes)
+                        {
+                            <li class="list-group-item">
+                                @if (socialType.Logo != null)
+                                {
+                                    <img src="@(socialType.Logo)" width="30" height="30" />
+                                }
+                                &nbsp; @socialType.Title
+                            </li>
+                        }
+                    </ul>
+                    <label for="SocialName">Новый тип</label>
+                    <input name="SocialName" class="form-control" />
+                    <label asp-for="LogoFile">Файл лого</label>
+                    <input asp-for="LogoFile" class="form-control" type="file" />
+                    <span asp-validation-for="LogoFile" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary">Добавить</button>
+            </form>
+        </div>
+        <div class="col mb-2">
+            <h4>Обновить тип</h4>
+            <form asp-action="Update" method="post" enctype="multipart/form-data">
+                @Html.AntiForgeryToken()
+                <div class="form-group">
+                    Обновить тип контакта:
+                    <select asp-for="SocialId" class="form-control"
+                            asp-items="@(new SelectList(Model.SocialTypes,"Id","Title"))">
+                    </select>
+                    <label for="SocialName">Новое наименование</label>
+                    <input name="SocialName" class="form-control" />
+                    <label asp-for="LogoFile">Файл лого</label>
+                    <input asp-for="LogoFile" class="form-control" type="file" />
+                    <span asp-validation-for="LogoFile" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary">Обновить</button>
+            </form>
+        </div>
+    </div>
+</div>
