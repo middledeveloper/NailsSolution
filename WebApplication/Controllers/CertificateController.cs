@@ -27,7 +27,7 @@ namespace WebApplication.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateAuthorityCenter(string authorityName, string authorityUrl)
+        public IActionResult Create(string authorityName, string authorityUrl)
         {
             if (!string.IsNullOrEmpty(authorityName))
             {
@@ -50,7 +50,7 @@ namespace WebApplication.Controllers
         }
 
         [HttpPost]
-        public IActionResult UpdateAuthorityCenter(int authorityId, string authorityName)
+        public IActionResult Update(int authorityId, string authorityName)
         {
             var authority = context.CertificationAuthorities.FirstOrDefault(x => x.Id == authorityId);
             if (!string.IsNullOrEmpty(authorityName) && authority.Title != authorityName)
