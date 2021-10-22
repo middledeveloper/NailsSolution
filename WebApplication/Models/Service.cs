@@ -8,7 +8,7 @@ namespace WebApplication.Models
     public class Service
     {
         public int Id { get; set; }
-        public User User { get; set; }
+        public string UserId { get; set; }
         [DisplayName("Наименование")]
         public string Title { get; set; }
         [DisplayName("Категория")]

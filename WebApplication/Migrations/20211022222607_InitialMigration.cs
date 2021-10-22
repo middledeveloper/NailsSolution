@@ -74,6 +74,20 @@ namespace WebApplication.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Photos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Path = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Photos", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Regions",
                 columns: table => new
                 {
@@ -132,6 +146,23 @@ namespace WebApplication.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SocialTypes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Testimonials",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    AuthorId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MasterId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Message = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Updated = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Testimonials", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -288,26 +319,6 @@ namespace WebApplication.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Photos",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    Path = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Photos", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Photos_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "PortfolioImages",
                 columns: table => new
                 {
@@ -322,6 +333,33 @@ namespace WebApplication.Migrations
                     table.PrimaryKey("PK_PortfolioImages", x => x.Id);
                     table.ForeignKey(
                         name: "FK_PortfolioImages_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Reservation",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MasterId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CityId = table.Column<int>(type: "int", nullable: false),
+                    ReceptionTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Completed = table.Column<bool>(type: "bit", nullable: false),
+                    RejectReasonId = table.Column<int>(type: "int", nullable: false),
+                    TestimonialId = table.Column<int>(type: "int", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Updated = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Reservation", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Reservation_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -352,28 +390,6 @@ namespace WebApplication.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Testimonials",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    Message = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Updated = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Testimonials", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Testimonials_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Cities",
                 columns: table => new
                 {
@@ -393,50 +409,6 @@ namespace WebApplication.Migrations
                         principalTable: "Regions",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Reservation",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    MasterId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    CityId = table.Column<int>(type: "int", nullable: true),
-                    ReceptionTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Completed = table.Column<bool>(type: "bit", nullable: false),
-                    RejectReasonId = table.Column<int>(type: "int", nullable: true),
-                    TestimonialId = table.Column<int>(type: "int", nullable: true),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Updated = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Reservation", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Reservation_AspNetUsers_MasterId",
-                        column: x => x.MasterId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Reservation_Cities_CityId",
-                        column: x => x.CityId,
-                        principalTable: "Cities",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Reservation_RejectReasons_RejectReasonId",
-                        column: x => x.RejectReasonId,
-                        principalTable: "RejectReasons",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Reservation_Testimonials_TestimonialId",
-                        column: x => x.TestimonialId,
-                        principalTable: "Testimonials",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -473,22 +445,22 @@ namespace WebApplication.Migrations
             migrationBuilder.InsertData(
                 table: "CertificationAuthorities",
                 columns: new[] { "Id", "Created", "Title", "Updated", "Url" },
-                values: new object[] { 1, new DateTime(2021, 10, 23, 1, 9, 46, 916, DateTimeKind.Local).AddTicks(994), "Paris Nail", new DateTime(2021, 10, 23, 1, 9, 46, 916, DateTimeKind.Local).AddTicks(994), "https://parisnail.ru/" });
+                values: new object[] { 1, new DateTime(2021, 10, 23, 1, 26, 6, 314, DateTimeKind.Local).AddTicks(558), "Paris Nail", new DateTime(2021, 10, 23, 1, 26, 6, 314, DateTimeKind.Local).AddTicks(558), "https://parisnail.ru/" });
 
             migrationBuilder.InsertData(
                 table: "Regions",
                 columns: new[] { "Id", "Created", "Title", "Updated" },
-                values: new object[] { 1, new DateTime(2021, 10, 23, 1, 9, 46, 916, DateTimeKind.Local).AddTicks(994), "Ленинградская область", new DateTime(2021, 10, 23, 1, 9, 46, 916, DateTimeKind.Local).AddTicks(994) });
+                values: new object[] { 1, new DateTime(2021, 10, 23, 1, 26, 6, 314, DateTimeKind.Local).AddTicks(558), "Ленинградская область", new DateTime(2021, 10, 23, 1, 26, 6, 314, DateTimeKind.Local).AddTicks(558) });
 
             migrationBuilder.InsertData(
                 table: "RejectReasons",
                 columns: new[] { "Id", "Created", "Title", "Updated" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2021, 10, 23, 1, 9, 46, 916, DateTimeKind.Local).AddTicks(994), "Состояние здоровья (мастер)", new DateTime(2021, 10, 23, 1, 9, 46, 916, DateTimeKind.Local).AddTicks(994) },
-                    { 2, new DateTime(2021, 10, 23, 1, 9, 46, 916, DateTimeKind.Local).AddTicks(994), "Состояние здоровья (клиент)", new DateTime(2021, 10, 23, 1, 9, 46, 916, DateTimeKind.Local).AddTicks(994) },
-                    { 3, new DateTime(2021, 10, 23, 1, 9, 46, 916, DateTimeKind.Local).AddTicks(994), "Технические проблемы", new DateTime(2021, 10, 23, 1, 9, 46, 916, DateTimeKind.Local).AddTicks(994) },
-                    { 4, new DateTime(2021, 10, 23, 1, 9, 46, 916, DateTimeKind.Local).AddTicks(994), "Неявка (клиент)", new DateTime(2021, 10, 23, 1, 9, 46, 916, DateTimeKind.Local).AddTicks(994) }
+                    { 1, new DateTime(2021, 10, 23, 1, 26, 6, 314, DateTimeKind.Local).AddTicks(558), "Состояние здоровья (мастер)", new DateTime(2021, 10, 23, 1, 26, 6, 314, DateTimeKind.Local).AddTicks(558) },
+                    { 2, new DateTime(2021, 10, 23, 1, 26, 6, 314, DateTimeKind.Local).AddTicks(558), "Состояние здоровья (клиент)", new DateTime(2021, 10, 23, 1, 26, 6, 314, DateTimeKind.Local).AddTicks(558) },
+                    { 3, new DateTime(2021, 10, 23, 1, 26, 6, 314, DateTimeKind.Local).AddTicks(558), "Технические проблемы", new DateTime(2021, 10, 23, 1, 26, 6, 314, DateTimeKind.Local).AddTicks(558) },
+                    { 4, new DateTime(2021, 10, 23, 1, 26, 6, 314, DateTimeKind.Local).AddTicks(558), "Неявка (клиент)", new DateTime(2021, 10, 23, 1, 26, 6, 314, DateTimeKind.Local).AddTicks(558) }
                 });
 
             migrationBuilder.InsertData(
@@ -496,26 +468,26 @@ namespace WebApplication.Migrations
                 columns: new[] { "Id", "Created", "Logo", "Title", "Updated" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2021, 10, 23, 1, 9, 46, 916, DateTimeKind.Local).AddTicks(994), "/Logos/Email.png", "Email", new DateTime(2021, 10, 23, 1, 9, 46, 916, DateTimeKind.Local).AddTicks(994) },
-                    { 2, new DateTime(2021, 10, 23, 1, 9, 46, 916, DateTimeKind.Local).AddTicks(994), "/Logos/Instagram.png", "Instagram", new DateTime(2021, 10, 23, 1, 9, 46, 916, DateTimeKind.Local).AddTicks(994) },
-                    { 3, new DateTime(2021, 10, 23, 1, 9, 46, 916, DateTimeKind.Local).AddTicks(994), "/Logos/Whatsapp.png", "Whatsapp", new DateTime(2021, 10, 23, 1, 9, 46, 916, DateTimeKind.Local).AddTicks(994) },
-                    { 4, new DateTime(2021, 10, 23, 1, 9, 46, 916, DateTimeKind.Local).AddTicks(994), "/Logos/VK.png", "VK", new DateTime(2021, 10, 23, 1, 9, 46, 916, DateTimeKind.Local).AddTicks(994) }
+                    { 1, new DateTime(2021, 10, 23, 1, 26, 6, 314, DateTimeKind.Local).AddTicks(558), "/Logos/Email.png", "Email", new DateTime(2021, 10, 23, 1, 26, 6, 314, DateTimeKind.Local).AddTicks(558) },
+                    { 2, new DateTime(2021, 10, 23, 1, 26, 6, 314, DateTimeKind.Local).AddTicks(558), "/Logos/Instagram.png", "Instagram", new DateTime(2021, 10, 23, 1, 26, 6, 314, DateTimeKind.Local).AddTicks(558) },
+                    { 3, new DateTime(2021, 10, 23, 1, 26, 6, 314, DateTimeKind.Local).AddTicks(558), "/Logos/Whatsapp.png", "Whatsapp", new DateTime(2021, 10, 23, 1, 26, 6, 314, DateTimeKind.Local).AddTicks(558) },
+                    { 4, new DateTime(2021, 10, 23, 1, 26, 6, 314, DateTimeKind.Local).AddTicks(558), "/Logos/VK.png", "VK", new DateTime(2021, 10, 23, 1, 26, 6, 314, DateTimeKind.Local).AddTicks(558) }
                 });
 
             migrationBuilder.InsertData(
                 table: "Cities",
                 columns: new[] { "Id", "Created", "RegionId", "Title", "Updated" },
-                values: new object[] { 1, new DateTime(2021, 10, 23, 1, 9, 46, 916, DateTimeKind.Local).AddTicks(994), 1, "Тихвин", new DateTime(2021, 10, 23, 1, 9, 46, 916, DateTimeKind.Local).AddTicks(994) });
+                values: new object[] { 1, new DateTime(2021, 10, 23, 1, 26, 6, 314, DateTimeKind.Local).AddTicks(558), 1, "Тихвин", new DateTime(2021, 10, 23, 1, 26, 6, 314, DateTimeKind.Local).AddTicks(558) });
 
             migrationBuilder.InsertData(
                 table: "Cities",
                 columns: new[] { "Id", "Created", "RegionId", "Title", "Updated" },
-                values: new object[] { 2, new DateTime(2021, 10, 23, 1, 9, 46, 916, DateTimeKind.Local).AddTicks(994), 1, "Пикалёво", new DateTime(2021, 10, 23, 1, 9, 46, 916, DateTimeKind.Local).AddTicks(994) });
+                values: new object[] { 2, new DateTime(2021, 10, 23, 1, 26, 6, 314, DateTimeKind.Local).AddTicks(558), 1, "Пикалёво", new DateTime(2021, 10, 23, 1, 26, 6, 314, DateTimeKind.Local).AddTicks(558) });
 
             migrationBuilder.InsertData(
                 table: "Cities",
                 columns: new[] { "Id", "Created", "RegionId", "Title", "Updated" },
-                values: new object[] { 3, new DateTime(2021, 10, 23, 1, 9, 46, 916, DateTimeKind.Local).AddTicks(994), 1, "Бокситогорск", new DateTime(2021, 10, 23, 1, 9, 46, 916, DateTimeKind.Local).AddTicks(994) });
+                values: new object[] { 3, new DateTime(2021, 10, 23, 1, 26, 6, 314, DateTimeKind.Local).AddTicks(558), 1, "Бокситогорск", new DateTime(2021, 10, 23, 1, 26, 6, 314, DateTimeKind.Local).AddTicks(558) });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -572,34 +544,14 @@ namespace WebApplication.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Photos_UserId",
-                table: "Photos",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_PortfolioImages_UserId",
                 table: "PortfolioImages",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reservation_CityId",
+                name: "IX_Reservation_UserId",
                 table: "Reservation",
-                column: "CityId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Reservation_MasterId",
-                table: "Reservation",
-                column: "MasterId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Reservation_RejectReasonId",
-                table: "Reservation",
-                column: "RejectReasonId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Reservation_TestimonialId",
-                table: "Reservation",
-                column: "TestimonialId");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Services_ReservationId",
@@ -614,11 +566,6 @@ namespace WebApplication.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Socials_UserId",
                 table: "Socials",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Testimonials_UserId",
-                table: "Testimonials",
                 column: "UserId");
         }
 
@@ -646,6 +593,9 @@ namespace WebApplication.Migrations
                 name: "CertificationAuthorities");
 
             migrationBuilder.DropTable(
+                name: "Cities");
+
+            migrationBuilder.DropTable(
                 name: "ContentBlocks");
 
             migrationBuilder.DropTable(
@@ -653,6 +603,9 @@ namespace WebApplication.Migrations
 
             migrationBuilder.DropTable(
                 name: "PortfolioImages");
+
+            migrationBuilder.DropTable(
+                name: "RejectReasons");
 
             migrationBuilder.DropTable(
                 name: "ServiceCategories");
@@ -667,22 +620,16 @@ namespace WebApplication.Migrations
                 name: "SocialTypes");
 
             migrationBuilder.DropTable(
-                name: "AspNetRoles");
-
-            migrationBuilder.DropTable(
-                name: "Reservation");
-
-            migrationBuilder.DropTable(
-                name: "Cities");
-
-            migrationBuilder.DropTable(
-                name: "RejectReasons");
-
-            migrationBuilder.DropTable(
                 name: "Testimonials");
 
             migrationBuilder.DropTable(
+                name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
                 name: "Regions");
+
+            migrationBuilder.DropTable(
+                name: "Reservation");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
