@@ -9,6 +9,6 @@ namespace WebApplication.Models.ViewModels
         public string SocialName { get; set; }
         public string SocialLogo { get; set; }
         public IFormFile LogoFile { get; set; }
-        public List<SocialType> SocialTypes { get; set; }
+        public IList<SocialType> SocialTypes { get; set; }
     }
 }

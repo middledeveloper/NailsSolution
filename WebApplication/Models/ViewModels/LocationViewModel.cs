@@ -8,7 +8,7 @@ namespace WebApplication.Models.ViewModels
         public string RegionName { get; set; }
         public int CityId { get; set; }
         public string CityName { get; set; }
-        public List<Region> Regions { get; set; }
-        public List<City> Cities { get; set; }
+        public IList<Region> Regions { get; set; }
+        public IList<City> Cities { get; set; }
     }
 }
