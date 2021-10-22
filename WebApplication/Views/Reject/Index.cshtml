@@ -15,15 +15,14 @@
             <h4>Создать причину отмены</h4>
             <form asp-action="Create" method="post">
                 <div class="form-group">
-                    Зарегистрированные причины:
                     <ul class="form-group">
                         @foreach (var reject in Model.RejectReasons)
                         {
                             <li class="list-group-item">@reject.Title</li>
                         }
                     </ul>
-                    <label for="RejectReasonName">Наименование</label>
-                    <input name="RejectReasonName" class="form-control" />
+                    <label for="RejectName">Наименование</label>
+                    <input name="RejectName" class="form-control" />
                 </div>
                 <button type="submit" class="btn btn-primary">Добавить</button>
             </form>
@@ -33,11 +32,11 @@
             <form asp-action="Update" method="post">
                 <div class="form-group">
                     Обновить причину:
-                    <select asp-for="RejectReasonId" class="form-control"
+                    <select asp-for="RejectId" class="form-control"
                             asp-items="@(new SelectList(Model.RejectReasons,"Id","Title"))">
                     </select>
-                    <label for="RejectReasonName">Новое наименование</label>
-                    <input name="RejectReasonName" class="form-control" />
+                    <label for="RejectName">Новое наименование</label>
+                    <input name="RejectName" class="form-control" />
                 </div>
                 <button type="submit" class="btn btn-primary">Обновить</button>
             </form>

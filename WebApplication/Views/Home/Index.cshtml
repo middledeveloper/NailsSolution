@@ -8,10 +8,12 @@
     var user = @Model;
 }
 
+@await Component.InvokeAsync("Master")
+
 @*<h1>Hello, @Model.Name (@Model.Location)!</h1>*@
 
 @*@{Html.RenderAction("Content", "Home");}
-@{Html.RenderAction("Photos", "Home");}
-@{Html.RenderAction("Masters", "Home");}
-@{Html.RenderAction("Price", "Home");}
-@{Html.RenderAction("Contacts", "Home");}*@
+    @{Html.RenderAction("Photos", "Home");}
+    @{Html.RenderAction("Masters", "Home");}
+    @{Html.RenderAction("Price", "Home");}
+    @{Html.RenderAction("Contacts", "Home");}*@

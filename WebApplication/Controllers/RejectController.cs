@@ -27,17 +27,17 @@ namespace WebApplication.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(string rejectReasonName)
+        public IActionResult Create(string rejectName)
         {
-            if (!string.IsNullOrEmpty(rejectReasonName))
+            if (!string.IsNullOrEmpty(rejectName))
             {
-                if (context.Regions.FirstOrDefault(x => x.Title == rejectReasonName) == null)
+                if (context.Regions.FirstOrDefault(x => x.Title == rejectName) == null)
                 {
                     var reject = new RejectReason()
                     {
                         Created = DateTime.Now,
                         Updated = DateTime.Now,
-                        Title = rejectReasonName
+                        Title = rejectName
                     };
 
                     context.RejectReasons.Add(reject);
@@ -49,12 +49,12 @@ namespace WebApplication.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update(int rejectReasonId, string rejectReasonName)
+        public IActionResult Update(int rejectId, string rejectName)
         {
-            var reject = context.RejectReasons.FirstOrDefault(x => x.Id == rejectReasonId);
-            if (!string.IsNullOrEmpty(rejectReasonName) && reject.Title != rejectReasonName)
+            var reject = context.RejectReasons.FirstOrDefault(x => x.Id == rejectId);
+            if (!string.IsNullOrEmpty(rejectName) && reject.Title != rejectName)
             {
-                reject.Title = rejectReasonName;
+                reject.Title = rejectName;
                 reject.Updated = DateTime.Now;
                 context.SaveChanges();
             }

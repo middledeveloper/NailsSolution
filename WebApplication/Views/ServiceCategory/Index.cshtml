@@ -1,0 +1,45 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model WebApplication.Models.ViewModels.ServiceCategoryViewModel
+
+@{
+    ViewData["Title"] = "Управление категориями услуг";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center mb-5">Управление категориями услуг</h1>
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col mb-2">
+            <h4>Создать категорию</h4>
+            <form asp-action="Create" method="post">
+                <div class="form-group">
+                    <ul class="form-group">
+                        @foreach (var category in Model.Categories)
+                        {
+                            <li class="list-group-item">@category.Title</li>
+                        }
+                    </ul>
+                    <label for="CategoryName">Наименование</label>
+                    <input name="CategoryName" class="form-control" />
+                </div>
+                <button type="submit" class="btn btn-primary">Добавить</button>
+            </form>
+        </div>
+        <div class="col mb-2">
+            <h4>Обновить категорию</h4>
+            <form asp-action="Update" method="post">
+                <div class="form-group">
+                    Обновить категорию:
+                    <select asp-for="CategoryId" class="form-control"
+                            asp-items="@(new SelectList(Model.Categories,"Id","Title"))">
+                    </select>
+                    <label for="CategoryName">Новое наименование</label>
+                    <input name="CategoryName" class="form-control" />
+                </div>
+                <button type="submit" class="btn btn-primary">Обновить</button>
+            </form>
+        </div>
+    </div>
+</div>

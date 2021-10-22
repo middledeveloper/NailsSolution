@@ -24,8 +24,4 @@
     <PackageReference Include="Serilog.Settings.Configuration" Version="3.2.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\Home\Components\" />
-  </ItemGroup>
-
 </Project>

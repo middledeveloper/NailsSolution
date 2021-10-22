@@ -31,6 +31,10 @@ namespace WebApplication.Controllers
                 //var userRoles = await userManager.GetRolesAsync(user);
 
                 //user.LoadUserCollections(context, userRoles);
+            }
+            else
+            {
+
             };
 
 

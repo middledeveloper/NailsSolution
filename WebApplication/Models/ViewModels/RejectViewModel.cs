@@ -4,8 +4,8 @@ namespace WebApplication.Models.ViewModels
 {
     public class RejectViewModel
     {
-        public int RejectReasonId { get; set; }
-        public string RejectReasonName { get; set; }
+        public int RejectId { get; set; }
+        public string RejectName { get; set; }
         public List<RejectReason> RejectReasons { get; set; }
     }
 }

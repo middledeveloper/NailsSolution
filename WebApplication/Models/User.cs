@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
 using WebApplication.Data;
 
 namespace WebApplication.Models
@@ -19,8 +17,10 @@ namespace WebApplication.Models
         public ICollection<Certificate> Certificates { get; set; }
         public ICollection<PortfolioImage> Portfolio { get; set; }
         public ICollection<ContentBlock> ContentBlocks { get; set; }
-        public int ExperienceYears { get; set; }
         public ICollection<Reservation> Reservations { get; set; }
+        public int ExperienceYears { get; set; }
+        public bool ActiveOnSaturday { get; set; }
+        public bool ActiveOnSunday { get; set; }
         public DateTime Created { get; set; }
         public DateTime Updated { get; set; }
 
