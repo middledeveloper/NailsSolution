@@ -85,26 +85,26 @@ namespace WebApplication.Areas.Identity.Pages.Account
                 {
                     var webSiteNeedAdmin = false;
                     // Create application roles and add user to default role
-                    if (!await _roleManager.RoleExistsAsync(AppRoles.AdminRole))
+                    if (!await _roleManager.RoleExistsAsync(RolesEnum.AdminRole))
                     {
-                        await _roleManager.CreateAsync(new IdentityRole(AppRoles.AdminRole));
+                        await _roleManager.CreateAsync(new IdentityRole(RolesEnum.AdminRole));
                         webSiteNeedAdmin = true;
                     }
 
-                    if (!await _roleManager.RoleExistsAsync(AppRoles.MasterRole))
+                    if (!await _roleManager.RoleExistsAsync(RolesEnum.MasterRole))
                     {
-                        await _roleManager.CreateAsync(new IdentityRole(AppRoles.MasterRole));
+                        await _roleManager.CreateAsync(new IdentityRole(RolesEnum.MasterRole));
                     }
 
-                    if (!await _roleManager.RoleExistsAsync(AppRoles.ClientRole))
+                    if (!await _roleManager.RoleExistsAsync(RolesEnum.ClientRole))
                     {
-                        await _roleManager.CreateAsync(new IdentityRole(AppRoles.ClientRole));
+                        await _roleManager.CreateAsync(new IdentityRole(RolesEnum.ClientRole));
                     }
 
                     if (webSiteNeedAdmin)
-                        await _userManager.AddToRoleAsync(user, AppRoles.AdminRole);
+                        await _userManager.AddToRoleAsync(user, RolesEnum.AdminRole);
 
-                    await _userManager.AddToRoleAsync(user, AppRoles.ClientRole);
+                    await _userManager.AddToRoleAsync(user, RolesEnum.ClientRole);
                     // Roles created and default role set
 
 

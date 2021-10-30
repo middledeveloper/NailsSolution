@@ -1,6 +1,6 @@
 ﻿namespace WebApplication.Utility
 {
-    public class AppRoles
+    public class RolesEnum
     {
         public const string AdminRole = "Admin";
         public const string ClientRole = "Client";

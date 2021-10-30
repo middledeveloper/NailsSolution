@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using WebApplication.Data;
 
 namespace WebApplication.Models
@@ -18,11 +19,14 @@ namespace WebApplication.Models
         public ICollection<PortfolioImage> Portfolio { get; set; }
         public ICollection<ContentBlock> ContentBlocks { get; set; }
         public ICollection<Reservation> Reservations { get; set; }
+        public ICollection<Testimonial> Testimonials { get; set; }
         public int ExperienceYears { get; set; }
         public bool ActiveOnSaturday { get; set; }
         public bool ActiveOnSunday { get; set; }
         public DateTime Created { get; set; }
         public DateTime Updated { get; set; }
+        [NotMapped]
+        public bool IsMaster { get; set; }
 
         public User LoadUserCollections(ApplicationDbContext context, IEnumerable<string> roles)
         {
