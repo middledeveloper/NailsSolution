@@ -27,6 +27,8 @@ namespace WebApplication.Controllers
         {
             var userEmail = User.FindFirstValue(ClaimTypes.Name);
             var user = await userManager.FindByEmailAsync(userEmail);
+            await user.LoadUserData(context);
+
             var userRoles = await userManager.GetRolesAsync(user);
 
             var model = new UserDataViewModel

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Threading.Tasks;
 using WebApplication.Data;
 
 namespace WebApplication.Models
@@ -28,19 +29,15 @@ namespace WebApplication.Models
         [NotMapped]
         public bool IsMaster { get; set; }
 
-        public User LoadUserCollections(ApplicationDbContext context, IEnumerable<string> roles)
+        public async Task<User> LoadUserData(ApplicationDbContext context)
         {
-            //if (roles.FirstOrDefault(x => x.ToLower() == "master") != null ||
-            //    roles.FirstOrDefault(x => x.ToLower() == "admin") != null)
-            //{
-                context.Entry(this).Collection(x => x.Certificates).Load();
-                context.Entry(this).Collection(x => x.ContentBlocks).Load();
-                context.Entry(this).Collection(x => x.Portfolio).Load();
-                context.Entry(this).Collection(x => x.Services).Load();
-            //}
-
-            context.Entry(this).Collection(x => x.Reservations).Load();
-            context.Entry(this).Collection(x => x.Socials).Load();
+            await context.Entry(this).Collection(x => x.Certificates).LoadAsync();
+            await context.Entry(this).Collection(x => x.ContentBlocks).LoadAsync();
+            await context.Entry(this).Collection(x => x.Portfolio).LoadAsync();
+            await context.Entry(this).Collection(x => x.Services).LoadAsync();
+            await context.Entry(this).Collection(x => x.Reservations).LoadAsync();
+            await context.Entry(this).Collection(x => x.Socials).LoadAsync();
+            await context.Entry(this).Collection(x => x.Testimonials).LoadAsync();
 
             return this;
         }
