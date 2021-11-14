@@ -1,0 +1,48 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model WebApplication.Models.ViewModels.UserDataViewModel
+
+@{
+    ViewData["Title"] = "Управление персональными настройками";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center mb-5">Управление персональными настройками</h1>
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col mb-2">
+            <h4>Мои сертификаты</h4>
+            @if (Model.Certificates != null)
+            {
+                @foreach (var certificate in Model.Certificates)
+                {
+                    <form asp-action="DeleteCertificate" method="post">
+                        <img src="@(certificate.Scan)" width="300" height="150" class="m-1" />
+                        <br />
+                        <input type="hidden" name="certificateId" value="@certificate.Id" />
+                        <button type="submit" class="btn btn-primary">Удалить</button>
+                    </form>
+                }
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col mb-2">
+            <h4>Добавить сертификат</h4>
+            <form asp-action="AddCertificate" method="post" enctype="multipart/form-data">
+                @Html.AntiForgeryToken()
+                <div class="form-group">
+                    <label asp-for="AuthorityId">Центр обучения:</label>
+                    <select asp-for="AuthorityId" class="form-control"
+                            asp-items="@(new SelectList(Model.Authorities,"Id","Title"))">
+                    </select>
+                    <label asp-for="ScanFile">Скан сертификата</label>
+                    <input asp-for="ScanFile" class="form-control" type="file" />
+                    <span asp-validation-for="ScanFile" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary">Добавить</button>
+            </form>
+        </div>
+    </div>
+</div>

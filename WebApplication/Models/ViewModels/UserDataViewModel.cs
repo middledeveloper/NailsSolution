@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
 
 namespace WebApplication.Models.ViewModels
 {
@@ -16,5 +17,9 @@ namespace WebApplication.Models.ViewModels
         public IList<Service> Services { get; set; }
 
         public bool IsMaster { get; set; }
+
+        public IFormFile ScanFile { get; set; }
+        public int AuthorityId { get; set; }
+        public IList<CertificationAuthority> Authorities { get; set; }
     }
 }
