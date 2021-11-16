@@ -8,5 +8,7 @@ namespace WebApplication.Models
         public string UserId { get; set; }
         public string Path { get; set; }
         public string Desc { get; set; }
+        public DateTime Created { get; set; }
+        public DateTime Updated { get; set; }
     }
 }

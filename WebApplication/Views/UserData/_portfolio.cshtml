@@ -1,0 +1,23 @@
+﻿@model List<PortfolioImage>
+
+<div class="col mb-2">
+    <h4>Моё портфолио</h4>
+    @if (Model.Count > 0)
+    {
+        @foreach (var portfolioImage in Model)
+        {
+            <form asp-action="DeletePortfolioImage" asp-controller="UserData" method="post">
+                <img src="@(portfolioImage.Path)" width="300" height="150" class="m-1" />
+                <br />
+                <span>@portfolioImage.Desc</span>
+                <br />
+                <input type="hidden" name="portfolioImageId" value="@portfolioImage.Id" />
+                <button type="submit" class="btn btn-primary btn-sm">Удалить</button>
+            </form>
+        }
+    }
+    else
+    {
+        <h6>Портфолио не заполнено</h6>
+    }
+</div>

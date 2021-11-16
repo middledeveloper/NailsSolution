@@ -1,0 +1,21 @@
+﻿@model List<ContentBlock>
+
+<div class="col mb-2">
+    <h4>Мои блоки информации</h4>
+    @if (Model.Count > 0)
+    {
+        @foreach (var contentBlock in Model)
+        {
+            <form asp-action="DeleteContentBlock" asp-controller="UserData" method="post">
+                <h6>@contentBlock.Title (порядковый номер: @contentBlock.DomOrder)</h6>
+                <span>@contentBlock.Content</span>
+                <input type="hidden" name="contentBlockId" value="@contentBlock.Id" />
+                <button type="submit" class="btn btn-primary btn-sm">Удалить</button>
+            </form>
+        }
+    }
+    else
+    {
+        <h6>Блоки информации не созданы</h6>
+    }
+</div>

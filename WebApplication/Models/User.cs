@@ -21,7 +21,6 @@ namespace WebApplication.Models
         public ICollection<ContentBlock> ContentBlocks { get; set; }
         public ICollection<Reservation> Reservations { get; set; }
         public ICollection<Testimonial> Testimonials { get; set; }
-        public int ExperienceYears { get; set; }
         public bool ActiveOnSaturday { get; set; }
         public bool ActiveOnSunday { get; set; }
         public DateTime Created { get; set; }

@@ -12,37 +12,127 @@
 <div class="container">
     <div class="row">
         <div class="col mb-2">
-            <h4>Мои сертификаты</h4>
-            @if (Model.Certificates != null)
+            <h4>Мои контакты</h4>
+            @if (Model.Socials.Count > 0)
             {
-                @foreach (var certificate in Model.Certificates)
+                @foreach (var social in Model.Socials)
                 {
-                    <form asp-action="DeleteCertificate" method="post">
-                        <img src="@(certificate.Scan)" width="300" height="150" class="m-1" />
+                    var contextSocial = Model.SocialTypes.First(x => x.Id == social.SocialTypeId);
+                    <form asp-action="DeleteSocial" method="post">
+                        <h6><img src="@contextSocial.Logo" width="30" height="30" /> @contextSocial.Title : @social.Account</h6>
                         <br />
-                        <input type="hidden" name="certificateId" value="@certificate.Id" />
-                        <button type="submit" class="btn btn-primary">Удалить</button>
+                        <input type="hidden" name="socialId" value="@social.Id" />
+                        <button type="submit" class="btn btn-primary btn-sm">Удалить</button>
                     </form>
                 }
+            }
+            else
+            {
+                <h6>Контакты не заполнены</h6>
             }
         </div>
     </div>
     <div class="row">
         <div class="col mb-2">
-            <h4>Добавить сертификат</h4>
-            <form asp-action="AddCertificate" method="post" enctype="multipart/form-data">
+            <h4>Добавить контакт</h4>
+            <form asp-action="AddSocial" method="post">
                 @Html.AntiForgeryToken()
                 <div class="form-group">
-                    <label asp-for="AuthorityId">Центр обучения:</label>
-                    <select asp-for="AuthorityId" class="form-control"
-                            asp-items="@(new SelectList(Model.Authorities,"Id","Title"))">
+                    <label asp-for=" SocialTypeId">Тип контакта:</label>
+                    <select asp-for="SocialTypeId" class="form-control"
+                            asp-items="@(new SelectList(Model.SocialTypes,"Id","Title"))">
                     </select>
-                    <label asp-for="ScanFile">Скан сертификата</label>
-                    <input asp-for="ScanFile" class="form-control" type="file" />
-                    <span asp-validation-for="ScanFile" class="text-danger"></span>
+                    <label asp-for="SocialAccount">Аккаунт</label>
+                    <input asp-for="SocialAccount" class="form-control" type="text" />
                 </div>
                 <button type="submit" class="btn btn-primary">Добавить</button>
             </form>
         </div>
     </div>
 </div>
+@if (Model.IsMaster)
+{
+    <div class="row">
+        <form asp-action="UpdateActiveDays" method="post">
+            <div class="row">
+                <div class="col mb-2">
+                    <label asp-for="ActiveOnSaturday">Работаю по субботам</label>
+                    <input asp-for="ActiveOnSaturday" type="checkbox" />
+                </div>
+                <div class="col mb-2">
+                    <label asp-for="ActiveOnSunday">Работаю по воскресениям</label>
+                    <input asp-for="ActiveOnSunday" type="checkbox" />
+                </div>
+            </div>
+            <div class="row">
+                <button type="submit" class="btn btn-primary btn-sm">Обновить</button>
+            </div>
+        </form>
+    </div>
+    <div class="container">
+        <div class="row">
+            @await Html.PartialAsync("_certificates", Model.Certificates);
+        </div>
+        <div class="row">
+            <div class="col mb-2">
+                <h4>Добавить сертификат</h4>
+                <form asp-action="AddCertificate" method="post" enctype="multipart/form-data">
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <label asp-for="AuthorityId">Центр обучения:</label>
+                        <select asp-for="AuthorityId" class="form-control"
+                                asp-items="@(new SelectList(Model.Authorities,"Id","Title"))">
+                        </select>
+                        <label asp-for="ScanFile">Скан сертификата</label>
+                        <input asp-for="ScanFile" class="form-control" type="file" />
+                        <span asp-validation-for="ScanFile" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Добавить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            @await Html.PartialAsync("_portfolio", Model.Portfolio);
+        </div>
+        <div class="row">
+            <div class="col mb-2">
+                <h4>Добавить элемент</h4>
+                <form asp-action="AddPortfolioImage" method="post" enctype="multipart/form-data">
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <label asp-for="PortfolioFile">Фото</label>
+                        <input asp-for="PortfolioFile" class="form-control" type="file" />
+                        <span asp-validation-for="PortfolioFile" class="text-danger"></span>
+                        <label asp-for="PortfolioFileDesc">Описание</label>
+                        <input asp-for="PortfolioFileDesc" class="form-control" type="text" />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Добавить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            @await Html.PartialAsync("_contentBlocks", Model.ContentBlocks);
+        </div>
+        <div class="row">
+            <div class="col mb-2">
+                <h4>Добавить информационный блок</h4>
+                <form asp-action="AddContentBlock" method="post">
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <label asp-for="ContentBlockTitle">Заголовок</label>
+                        <input asp-for="ContentBlockTitle" class="form-control" type="text" />
+                        <label asp-for="ContentBlockDomOrder">Порядковый номер блока</label>
+                        <input asp-for="ContentBlockDomOrder" class="form-control" type="text" />
+                        <label asp-for="ContentBlockContent">Содержание блока</label>
+                        <input asp-for="ContentBlockContent" class="form-control" type="text" />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Добавить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+}

@@ -32,7 +32,6 @@ namespace WebApplication.Migrations
                     Photo = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CityId = table.Column<int>(type: "int", nullable: true),
                     RegionId = table.Column<int>(type: "int", nullable: true),
-                    ExperienceYears = table.Column<int>(type: "int", nullable: true),
                     ActiveOnSaturday = table.Column<bool>(type: "bit", nullable: true),
                     ActiveOnSunday = table.Column<bool>(type: "bit", nullable: true),
                     Created = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -80,7 +79,9 @@ namespace WebApplication.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Path = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Path = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Updated = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -309,7 +310,9 @@ namespace WebApplication.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     Path = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Desc = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Desc = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Updated = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -452,22 +455,22 @@ namespace WebApplication.Migrations
             migrationBuilder.InsertData(
                 table: "CertificationAuthorities",
                 columns: new[] { "Id", "Created", "Title", "Updated", "Url" },
-                values: new object[] { 1, new DateTime(2021, 10, 31, 0, 30, 23, 819, DateTimeKind.Local).AddTicks(2741), "Paris Nail", new DateTime(2021, 10, 31, 0, 30, 23, 819, DateTimeKind.Local).AddTicks(2741), "https://parisnail.ru/" });
+                values: new object[] { 1, new DateTime(2021, 11, 16, 15, 57, 9, 319, DateTimeKind.Local).AddTicks(5316), "Paris Nail", new DateTime(2021, 11, 16, 15, 57, 9, 319, DateTimeKind.Local).AddTicks(5316), "https://parisnail.ru/" });
 
             migrationBuilder.InsertData(
                 table: "Regions",
                 columns: new[] { "Id", "Created", "Title", "Updated" },
-                values: new object[] { 1, new DateTime(2021, 10, 31, 0, 30, 23, 819, DateTimeKind.Local).AddTicks(2741), "Ленинградская область", new DateTime(2021, 10, 31, 0, 30, 23, 819, DateTimeKind.Local).AddTicks(2741) });
+                values: new object[] { 1, new DateTime(2021, 11, 16, 15, 57, 9, 319, DateTimeKind.Local).AddTicks(5316), "Ленинградская область", new DateTime(2021, 11, 16, 15, 57, 9, 319, DateTimeKind.Local).AddTicks(5316) });
 
             migrationBuilder.InsertData(
                 table: "RejectReasons",
                 columns: new[] { "Id", "Created", "Title", "Updated" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2021, 10, 31, 0, 30, 23, 819, DateTimeKind.Local).AddTicks(2741), "Состояние здоровья (мастер)", new DateTime(2021, 10, 31, 0, 30, 23, 819, DateTimeKind.Local).AddTicks(2741) },
-                    { 2, new DateTime(2021, 10, 31, 0, 30, 23, 819, DateTimeKind.Local).AddTicks(2741), "Состояние здоровья (клиент)", new DateTime(2021, 10, 31, 0, 30, 23, 819, DateTimeKind.Local).AddTicks(2741) },
-                    { 3, new DateTime(2021, 10, 31, 0, 30, 23, 819, DateTimeKind.Local).AddTicks(2741), "Технические проблемы", new DateTime(2021, 10, 31, 0, 30, 23, 819, DateTimeKind.Local).AddTicks(2741) },
-                    { 4, new DateTime(2021, 10, 31, 0, 30, 23, 819, DateTimeKind.Local).AddTicks(2741), "Неявка (клиент)", new DateTime(2021, 10, 31, 0, 30, 23, 819, DateTimeKind.Local).AddTicks(2741) }
+                    { 1, new DateTime(2021, 11, 16, 15, 57, 9, 319, DateTimeKind.Local).AddTicks(5316), "Состояние здоровья (мастер)", new DateTime(2021, 11, 16, 15, 57, 9, 319, DateTimeKind.Local).AddTicks(5316) },
+                    { 2, new DateTime(2021, 11, 16, 15, 57, 9, 319, DateTimeKind.Local).AddTicks(5316), "Состояние здоровья (клиент)", new DateTime(2021, 11, 16, 15, 57, 9, 319, DateTimeKind.Local).AddTicks(5316) },
+                    { 3, new DateTime(2021, 11, 16, 15, 57, 9, 319, DateTimeKind.Local).AddTicks(5316), "Технические проблемы", new DateTime(2021, 11, 16, 15, 57, 9, 319, DateTimeKind.Local).AddTicks(5316) },
+                    { 4, new DateTime(2021, 11, 16, 15, 57, 9, 319, DateTimeKind.Local).AddTicks(5316), "Неявка (клиент)", new DateTime(2021, 11, 16, 15, 57, 9, 319, DateTimeKind.Local).AddTicks(5316) }
                 });
 
             migrationBuilder.InsertData(
@@ -475,26 +478,26 @@ namespace WebApplication.Migrations
                 columns: new[] { "Id", "Created", "Logo", "Title", "Updated" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2021, 10, 31, 0, 30, 23, 819, DateTimeKind.Local).AddTicks(2741), "/Logos/Email.png", "Email", new DateTime(2021, 10, 31, 0, 30, 23, 819, DateTimeKind.Local).AddTicks(2741) },
-                    { 2, new DateTime(2021, 10, 31, 0, 30, 23, 819, DateTimeKind.Local).AddTicks(2741), "/Logos/Instagram.png", "Instagram", new DateTime(2021, 10, 31, 0, 30, 23, 819, DateTimeKind.Local).AddTicks(2741) },
-                    { 3, new DateTime(2021, 10, 31, 0, 30, 23, 819, DateTimeKind.Local).AddTicks(2741), "/Logos/Whatsapp.png", "Whatsapp", new DateTime(2021, 10, 31, 0, 30, 23, 819, DateTimeKind.Local).AddTicks(2741) },
-                    { 4, new DateTime(2021, 10, 31, 0, 30, 23, 819, DateTimeKind.Local).AddTicks(2741), "/Logos/VK.png", "VK", new DateTime(2021, 10, 31, 0, 30, 23, 819, DateTimeKind.Local).AddTicks(2741) }
+                    { 1, new DateTime(2021, 11, 16, 15, 57, 9, 319, DateTimeKind.Local).AddTicks(5316), "/Logos/Email.png", "Email", new DateTime(2021, 11, 16, 15, 57, 9, 319, DateTimeKind.Local).AddTicks(5316) },
+                    { 2, new DateTime(2021, 11, 16, 15, 57, 9, 319, DateTimeKind.Local).AddTicks(5316), "/Logos/Instagram.png", "Instagram", new DateTime(2021, 11, 16, 15, 57, 9, 319, DateTimeKind.Local).AddTicks(5316) },
+                    { 3, new DateTime(2021, 11, 16, 15, 57, 9, 319, DateTimeKind.Local).AddTicks(5316), "/Logos/Whatsapp.png", "Whatsapp", new DateTime(2021, 11, 16, 15, 57, 9, 319, DateTimeKind.Local).AddTicks(5316) },
+                    { 4, new DateTime(2021, 11, 16, 15, 57, 9, 319, DateTimeKind.Local).AddTicks(5316), "/Logos/VK.png", "VK", new DateTime(2021, 11, 16, 15, 57, 9, 319, DateTimeKind.Local).AddTicks(5316) }
                 });
 
             migrationBuilder.InsertData(
                 table: "Cities",
                 columns: new[] { "Id", "Created", "RegionId", "Title", "Updated" },
-                values: new object[] { 1, new DateTime(2021, 10, 31, 0, 30, 23, 819, DateTimeKind.Local).AddTicks(2741), 1, "Тихвин", new DateTime(2021, 10, 31, 0, 30, 23, 819, DateTimeKind.Local).AddTicks(2741) });
+                values: new object[] { 1, new DateTime(2021, 11, 16, 15, 57, 9, 319, DateTimeKind.Local).AddTicks(5316), 1, "Тихвин", new DateTime(2021, 11, 16, 15, 57, 9, 319, DateTimeKind.Local).AddTicks(5316) });
 
             migrationBuilder.InsertData(
                 table: "Cities",
                 columns: new[] { "Id", "Created", "RegionId", "Title", "Updated" },
-                values: new object[] { 2, new DateTime(2021, 10, 31, 0, 30, 23, 819, DateTimeKind.Local).AddTicks(2741), 1, "Пикалёво", new DateTime(2021, 10, 31, 0, 30, 23, 819, DateTimeKind.Local).AddTicks(2741) });
+                values: new object[] { 2, new DateTime(2021, 11, 16, 15, 57, 9, 319, DateTimeKind.Local).AddTicks(5316), 1, "Пикалёво", new DateTime(2021, 11, 16, 15, 57, 9, 319, DateTimeKind.Local).AddTicks(5316) });
 
             migrationBuilder.InsertData(
                 table: "Cities",
                 columns: new[] { "Id", "Created", "RegionId", "Title", "Updated" },
-                values: new object[] { 3, new DateTime(2021, 10, 31, 0, 30, 23, 819, DateTimeKind.Local).AddTicks(2741), 1, "Бокситогорск", new DateTime(2021, 10, 31, 0, 30, 23, 819, DateTimeKind.Local).AddTicks(2741) });
+                values: new object[] { 3, new DateTime(2021, 11, 16, 15, 57, 9, 319, DateTimeKind.Local).AddTicks(5316), 1, "Бокситогорск", new DateTime(2021, 11, 16, 15, 57, 9, 319, DateTimeKind.Local).AddTicks(5316) });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

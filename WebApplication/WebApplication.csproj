@@ -24,4 +24,9 @@
     <PackageReference Include="Serilog.Settings.Configuration" Version="3.2.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Certificates\" />
+    <Folder Include="wwwroot\Portfolio\" />
+  </ItemGroup>
+
 </Project>

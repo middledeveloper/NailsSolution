@@ -1,0 +1,21 @@
+﻿@model List<Certificate>
+
+<div class="col mb-2">
+    <h4>Мои сертификаты</h4>
+    @if (Model.Count > 0)
+    {
+        @foreach (var certificate in Model)
+        {
+            <form asp-action="DeleteCertificate" asp-controller="UserData" method="post">
+                <img src="@(certificate.Scan)" width="300" height="150" class="m-1" />
+                <br />
+                <input type="hidden" name="certificateId" value="@certificate.Id" />
+                <button type="submit" class="btn btn-primary btn-sm">Удалить</button>
+            </form>
+        }
+    }
+    else
+    {
+        <h5>Сертификаты не загружены</h5>
+    }
+</div>
