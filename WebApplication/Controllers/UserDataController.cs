@@ -52,14 +52,16 @@ namespace WebApplication.Controllers
 
             if (userRoles.Contains(RolesEnum.MasterRole))
             {
+                model.IsMaster = true;
+                model.Authorities = await context.CertificationAuthorities.ToListAsync();
+                model.ServiceCategories = await context.ServiceCategories.ToListAsync();
+
                 model.ActiveOnSaturday = user.ActiveOnSaturday;
                 model.ActiveOnSunday = user.ActiveOnSunday;
-                model.Authorities = await context.CertificationAuthorities.ToListAsync();
-                model.IsMaster = true;
                 model.Certificates = user.Certificates.ToList();
                 model.ContentBlocks = user.ContentBlocks.ToList();
                 model.Portfolio = user.Portfolio.ToList();
-                model.Services = user.Services.ToList();
+                model.Services = user.Services.OrderBy(x => x.CategoryId).ToList();
             }
 
             model.SocialTypes = context.SocialTypes.ToList();
@@ -231,6 +233,36 @@ namespace WebApplication.Controllers
             user.ActiveOnSaturday = activeOnSaturday;
             user.ActiveOnSunday = activeOnSunday;
 
+            await context.SaveChangesAsync();
+
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> AddService(int serviceCategoryId, string serviceTitle, decimal servicePrice)
+        {
+            var user = await DefineCurrentUser();
+
+            var service = new Service()
+            {
+                CategoryId = serviceCategoryId,
+                Title = serviceTitle,
+                Price = servicePrice,
+                Created = DateTime.Now,
+                Updated = DateTime.Now,
+                UserId = user.Id
+            };
+
+            context.Services.Add(service);
+            await context.SaveChangesAsync();
+
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> DeleteService(int serviceId)
+        {
+            var service = await context.Services.FirstAsync(x => x.Id == serviceId);
+
+            context.Services.Remove(service);
             await context.SaveChangesAsync();
 
             return RedirectToAction("Index");

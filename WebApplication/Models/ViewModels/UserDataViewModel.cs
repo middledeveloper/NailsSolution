@@ -38,5 +38,11 @@ namespace WebApplication.Models.ViewModels
         public int SocialTypeId { get; set; }
         public string SocialAccount { get; set; }
         public IList<SocialType> SocialTypes { get; set; }
+
+        // Services form fields
+        public int ServiceCategoryId { get; set; }
+        public string ServiceTitle { get; set; }
+        public decimal ServicePrice { get; set; }
+        public IList<ServiceCategory> ServiceCategories { get; set; }
     }
 }

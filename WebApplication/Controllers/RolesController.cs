@@ -8,12 +8,12 @@ using WebApplication.Models.ViewModels;
 
 namespace WebApplication.Controllers
 {
-    public class RoleController : Controller
+    public class RolesController : Controller
     {
         private readonly UserManager<User> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
 
-        public RoleController(RoleManager<IdentityRole> roleManager, UserManager<User> userManager)
+        public RolesController(RoleManager<IdentityRole> roleManager, UserManager<User> userManager)
         {
             this.userManager = userManager;
             this.roleManager = roleManager;
