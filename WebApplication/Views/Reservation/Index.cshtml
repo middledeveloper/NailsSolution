@@ -1,0 +1,46 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model WebApplication.Models.ViewModels.RejectViewModel
+
+@{
+    ViewData["Title"] = "Запись";
+}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - НаМаникюр</title>
+    <link rel='stylesheet' href='~/lib/fullcalendar/main.css' />
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                locale: 'ru',
+                dateClick: function () {
+                    alert('Wow!');
+                }
+            });
+            calendar.render();
+        });
+
+    </script>
+
+</head>
+<body>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+
+            <div id='calendar'></div>
+
+        </main>
+    </div>
+
+    <script src='~/lib/fullcalendar/main.js'></script>
+    <script src='~/lib/fullcalendar/locales/ru.js'></script>
+</body>
+</html>
